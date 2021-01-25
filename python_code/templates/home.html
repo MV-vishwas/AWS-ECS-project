@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>home</title>
+	<style>
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 25px;
+}
+
+li a:hover {
+  background-color: #111;
+}
+
+div.data td
+{
+	border: 1px solid black;
+}
+
+.service table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  height: auto;
+  font-size: 15px;
+}
+
+.service td, .service th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+.service table, .service th, .service td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+.service tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+
+</style>
+
+</head>
+<body>
+
+<!-- Main box -->
+<div style="width: 100%; height: auto;background-color: rgba(69, 81, 192, 0.925);margin-top: 0px ;padding: 0px">
+
+	<div style="color: white;">
+		<table style="width: 100%;height: auto;">
+		<tr>
+		<td><h1 style="font-size: 40px">Welcome to ECS book Inventory</h1><td>
+		<td>
+			<!-- <form action="getbook" method="get" >
+				<input type="text" name="bookid" placeholder="Enter Book ID" style="font-size: 20px" required='required'>
+				<input type="submit" value="Search" style="font-size: 20px">
+			</form> -->
+		<td>
+		<td>
+            {% if session['uname'] -%}
+            <label style="font-size: 30px">{{session['uname']}}</label>
+            {% else -%}
+            <a href="login_form" style="font-size: 30px; color:#dddddd">Login</a>
+            {% endif %}
+        <td>
+		</tr>
+		</table>
+	</div>
+</div>
+
+<ul>
+  <li><a class="active" href="/">Home</a></li>
+  {% if session['userID'] %}
+  <li><a href="/get_favourite/{{ session['userID'] }}">My favorite</a></li>
+  {% else -%}
+  <li><a href="/login_form">My favorite</a></li>
+  {% endif %}
+  <!-- <li><a href="updatefavourite_form">ADD / REMOVE favorite</a></li> -->
+  <li><a href="/add_book_form">Add Book</a></li>
+  <li><a href="/update_book_form">Update Book</a></li>
+  <li><a href="/filter_form">Filter</a></li>
+
+</ul>	
+
+<div align="center"><label style="font-size: 50px; margin-bottom: 20x;" >  APIs </label></div>
+
+<div class="service">
+  <table>
+    <tr>
+      <th>API EndPoint</th>
+      <th> Details</th>
+      <th>Example</th>
+    </tr>
+    <tr>
+      <td>get_books(filter, start_page,Page_size )</td>
+      <td>Get list of Books Based on the Specified filter </td>
+      <td>HTTP POST "/get_books/" </td>
+    </tr>
+    <tr>
+      <td>get_book(id)</td>
+      <td>Get  the Specified Book with book ID</td>
+      <td>HTTP GET "/get_book/{book_id}"</td>
+    </tr>
+    <tr>
+      <td>add_book(params)</td>
+      <td> Add the Specified Book for that user need to login with login ID and password. </td>
+      <td>HTTP POST "/add_book"</td>
+    </tr>
+    <tr>
+      <td>update_book(id,params)</td>
+      <td>update the Specified Book </td>
+      <td>HTTP POST "/update_book"</td>
+    </tr>
+    <tr>
+      <td>get_favourite(user_id)</td>
+      <td>get the list favourites marked books list for user using user ID for that user need to login with login ID and password.</td>
+      <td>HTTP GET "/get_favourite/{user_id}"</td>
+    </tr>
+    <tr>
+      <td>add_favourite(user_id, book_id)</td>
+      <td>Add a book to user favourite list for that user need to login with login ID and password. </td>
+      <td>HTTP GET "/get_favourite/{book_id}/{user_id}"</td>
+    </tr>
+    <tr>
+      <td>remove_favourite(user_id, book_id)</td>
+      <td>remove book from user favorite list for that user need to login with login ID and password.</td>
+      <td>HTTP GET "/remove_favourite/{book_id}/{user_id}"</td>
+    </tr>
+  </table>
+  
+</div>
+
+</body>
+</html>

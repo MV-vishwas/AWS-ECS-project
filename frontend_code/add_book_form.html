@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>home</title>
+	<style>
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+li a:hover {
+  background-color: #111;
+}
+
+div.data td
+{
+	border: 1px solid black;
+}
+</style>
+
+</head>
+<body>
+
+<!-- Main box -->
+<div style="width: 100%; height: auto;background-color: rgba(69, 81, 192, 0.925);margin-top: 0px ;padding: 0px">
+
+	<div style="color: white;">
+		<table style="width: 100%;height: auto;">
+		<tr>
+		<td><h1 style="font-size: 30px">Welcome to ECS book Inventory</h1><td>
+		<td>
+			<!-- <form action="getbook" method="get" >
+				<input type="text" name="bookid" placeholder="Enter Book ID" style="font-size: 20px" required='required'>
+				<input type="submit" value="Search" style="font-size: 20px">
+			</form> -->
+		<td>
+		<td>
+            {% if session['uname'] -%}
+            <label style="font-size: 30px">{{session['uname']}}</label>
+            {% else -%}
+            <a href="login_form" style="font-size: 30px">Login</a>
+            {% endif %}
+        <td>
+		</tr>
+		</table>
+	</div>
+</div>
+
+<ul>
+  <li><a class="active" href="/">Home</a></li>
+  {% if session['userID'] %}
+  <li><a href="/get_favourite/{{ session['userID'] }}">My favorite</a></li>
+  {% else -%}
+  <li><a href="/login_form">My favorite</a></li>
+  {% endif %}
+  <!-- <li><a href="updatefavourite_form">ADD / REMOVE favorite</a></li> -->
+  <li><a href="add_book_form">Add Book</a></li>
+  <li><a href="update_book_form">Update Book</a></li>
+  <li><a href="filter_form">Filter</a></li>
+
+</ul>
+
+<div align="center" style="margin-top: 50px">
+	<h1 style="font-size: 30px"> ADD BOOK</h1>
+	<form action="/add_book" method="POST">
+		<table>
+			<tr>
+				<td>Book ID</td><td><input type="number" name="bookid" required='required' min="0"></td>
+			</tr>
+			
+		    <tr>
+				<td>params</td><td><textarea rows="4" cols="50" name="params" placeholder='{"language_code": "eng", "price": "314", "isbn": "470045299", "average_rating": "3.5", "title": "eBay for Dummies", "ratings_count": "102", "authors": "Marsha Collier"}'></textarea></td>
+			</tr>
+		
+			<tr><td>Example</td>
+				<td>
+				'{"language_code": "eng", "price": "314", "isbn": "470045299", "average_rating": "3.5", "title": "eBay for Dummies", "ratings_count": "102", "authors": "Marsha Collier"}'
+			</td>
+			</tr>
+
+			<tr>
+				<td><input type="submit" value="submit"> </td><td><input type="reset" ></td>
+			</tr>
+				
+		</table>
+	</form>
+</div>
+
+
+</body>
+</html>

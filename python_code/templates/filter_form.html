@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>home</title>
+	<style>
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+li a:hover {
+  background-color: #111;
+}
+
+div.data td
+{
+	border: 1px solid black;
+}
+</style>
+
+</head>
+<body>
+
+<!-- Main box -->
+<div style="width: 100%; height: auto;background-color: rgba(69, 81, 192, 0.925);margin-top: 0px ;padding: 0px">
+
+	<div style="color: white;">
+		<table style="width: 100%;height: auto;">
+		<tr>
+		<td><h1 style="font-size: 30px">Welcome to ECS book Inventory</h1><td>
+		<td>
+			<!-- <form action="getbook" method="get" >
+				<input type="text" name="bookid" placeholder="Enter Book ID" style="font-size: 20px" required='required'>
+				<input type="submit" value="Search" style="font-size: 20px">
+			</form> -->
+		<td>
+		<td>
+            {% if session['uname'] -%}
+            <label style="font-size: 30px">{{session['uname']}}</label>
+            {% else -%}
+            <a href="login_form" style="font-size: 30px">Login</a>
+            {% endif %}
+        <td>
+		</tr>
+		</table>
+	</div>
+</div>
+
+<ul>
+  <li><a class="active" href="/">Home</a></li>
+  {% if session['userID'] %}
+  <li><a href="/get_favourite/{{ session['userID'] }}">My favorite</a></li>
+  {% else -%}
+  <li><a href="/login_form">My favorite</a></li>
+  {% endif %}
+  <!-- <li><a href="updatefavourite_form">ADD / REMOVE favorite</a></li> -->
+  <li><a href="add_book_form">Add Book</a></li>
+  <li><a href="update_book_form">Update Book</a></li>
+  <li><a href="filter_form">Filter</a></li>
+
+</ul>
+
+<div align="center" style="margin-top: 50px">
+	<h1 style="font-size: 30px"> FILTER BOOK</h1>
+
+	<form action="get_books" method="post">
+
+		<table>
+			<tr>
+				<td>Filter By</td>
+				<td>
+					<select  name="condition" style="font-size: 15px">
+					    <option value="title">Tilte</option>
+					    <option value="authors">Authors</option>
+					    <option value="average_rating">Average rating</option>
+					    <option value="isbn">isbn</option>
+					    <option value="language_code">Language code</option>
+					    <option value="rating_count">Rating count</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					Value
+				</td>
+				<td>
+					<input type="text" name="value" required='required'>
+				</td>
+			</tr>
+			</tr>
+			<!-- <tr>
+				<td>Price</td>
+				<td><input type="number" name="min_price" placeholder="Min Price"> &nbsp<input type="number" name="max_price" placeholder="Max Price" ></td>
+			</tr> -->
+
+			<tr>
+				<td>Start Page</td>
+				<td><input type="number" name="start_page" min="0" required='required'></td>
+			</tr>
+			
+			<tr>
+				<td>Page Size</td>
+				<td><input type="number" name="page_size" min="0" required='required'></td>
+			</tr>
+			
+			<tr>
+				<td><input type="submit" name="Enter" value="Enter"></td>
+				<td><input type="reset" name=""></td>
+			</tr>
+		</table>
+	</form>
+</div>
+
+
+</body>
+</html>
